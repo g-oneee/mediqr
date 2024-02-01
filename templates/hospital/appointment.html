@@ -1,0 +1,233 @@
+{% extends 'hospital/admin_base2.html' %} {% load static %} {% load
+widget_tweaks %} {% block content %}
+<head>
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    .note {
+      text-align: center;
+      height: 80px;
+      {% comment %} background: -webkit-linear-gradient(left, #0072ff, #8811c5); {% endcomment %}
+      background-color: #13C5DD;
+      color: #fff;
+      font-weight: bold;
+      line-height: 80px;
+    }
+
+    .form-content {
+      padding: 5%;
+      border: 1px solid #ced4da;
+      margin-bottom: 2%;
+    }
+
+    .form-control {
+      border-radius: 1.5rem;
+    }
+
+    .btnSubmit {
+      border: none;
+      border-radius: 1.5rem;
+      padding: 1%;
+      width: 20%;
+      cursor: pointer;
+      background: #1D2A4D;
+      color: #fff;
+    }
+
+    .btnSubmit1 {
+      margin-left: 100px;
+      border: none;
+      border-radius: 1.5rem;
+      padding: 1%;
+      width: 20%;
+      cursor: pointer;
+      background: #1D2A4D;
+      color: #fff;
+    }
+
+    .menu {
+      top: 50px;
+    }
+  </style>
+
+  <link
+    href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+    rel="stylesheet"
+    id="bootstrap-css"
+  />
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<div class="container-fluid bg-primary my-5 py-5" style="margin-top: -100px">
+  <div class="container py-5">
+    <div class="row gx-5">
+      <div class="col-lg-6 mb-5 mb-lg-0">
+        <div class="mb-4">
+          <h3
+            class="d-inline-block text-white text-uppercase border-bottom border-5"
+          >
+            Welcome
+          </h3>
+          <h1 class="display-4">{{request.user.first_name}}</h1>
+        </div>
+
+        <a
+          class="btn btn-dark rounded-pill py-3 px-5 me-3"
+          href="/admin-patient"
+          >View Patients</a
+        >
+        <a
+          class="btn btn-outline-dark rounded-pill py-3 px-5"
+          href="/admin-doctor"
+          >View Doctors</a
+        >
+      </div>
+
+      <img class="rounded-circle shadow-4-strong img-fluid" style="width: 300px;
+      height: 250px; margin-right:-400px" alt="avatar2" src="{% static
+      "images/adminpropic.png" %} " />
+    </div>
+  </div>
+</div>
+
+<form method="post" id="101" onsubmit="handleSubmit('search');">
+  {% csrf_token %}
+  <div class="container register-form">
+    <div class="form">
+      <div class="note">
+        <h3>Book Appointment Details</h3>
+      </div>
+      <div class="form-content">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group d-flex w-75">
+              {% render_field appointmentForm.patientId class="form-control
+              pr-10 w-50" placeholder="patient" %}
+
+              <!-- <button type="submit" class="btnSubmit mx-auto" onclick="window.location.href='{% url "view-scanner" %}' " >scanner</button> -->
+              <button
+                type="button"
+                class="btnSubmit"
+                onclick="handleSubmit('scanner')"
+              >
+                Scanner
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btnSubmit">Search</button>
+        <br />
+
+        {% if appointmentForm.is_bound and appointmentForm.errors %}
+        <div class="alert alert-danger">
+          There was an error with the form submission. Please check the provided
+          patient ID.
+        </div>
+        {% endif %} {% if patient_info %}
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <label class="labels"
+              >Blood Group : {{patient_info.Blood_group_choices}}</label
+            >
+          </div>
+          <div class="col-md-12">
+            <label class="labels">Gender : {{patient_info.gender}}</label>
+          </div>
+          <div class="col-md-12">
+            <label class="labels">Height : {{patient_info.height}} cm</label>
+          </div>
+          <div class="col-md-12">
+            <label class="labels">Weight : {{patient_info.weight}} kg</label>
+          </div>
+          <div class="col-md-12">
+            <label class="labels">Address : {{patient_info.address}}</label>
+          </div>
+          <div class="col-md-12">
+            <label class="labels"
+              >Mobile Number : {{patient_info.mobile}}</label
+            >
+          </div>
+          <div class="col-md-12">
+            <label class="labels"
+              >Emergency Contact Number : {{patient_info.mobile2}}</label
+            >
+          </div>
+          <div class="col-md-12">
+            <label class="labels">History : {{patient_info.history}}</label>
+          </div>
+          <!-- <div class="col-md-12"><label class="labels" id = 'patient_id2'>Patient_id : {{patient_info.user_id}}</label></div> -->
+          <div class="col-md-12">
+            <label class="labels" data-id="patient_id"
+              >Patient_id : {{patient_info.user_id}}</label
+            >
+          </div>
+        </div>
+        {% else %}
+        <div>No patient information available for the provided ID.</div>
+        {% endif %}
+        <!-- {% comment %} <button type="submit" class="btnSubmit" onclick="window.location.href='/ admin-add-appointment'">Book</button> {% endcomment %} -->
+
+        <!-- <button type="submit" class="btnSubmit" onclick="redirectToAppointment('{% url "admin-add-appointment" %}', '{{patient_info.user_id}}')">Book</button> -->
+        <!-- <button type="submit" class="btnSubmit" onclick="window.location.href='{% url "admin-add-appointment" %}?user_id={{ patient_info.user_id }}'">Book</button> -->
+        <button type="button" class="btnSubmit" onclick="handleSubmit('book')">
+          Book
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- <script>
+  function redirectToScanner() {
+    // Get the patient ID from the form field
+    var patientId = document.getElementById('id_patientId').value;
+
+    // Set the patient ID in the hidden input field
+    document.getElementById('scannedContent').value = patientId;
+
+    // Submit the form
+    document.getElementById('scanForm').submit();
+    
+  }
+
+  function redirectToAppointment(url, user_id) {
+    window.location.href = url + '?user_id=' + user_id;
+}
+</script> -->
+
+<script>
+  function handleSubmit(buttonClicked) {
+    if (buttonClicked === "search") {
+      // Perform the search action
+      document.getElementById("101").submit();
+    } else if (buttonClicked === "book") {
+      // Perform the book action
+      var patientIdLabel = document.querySelector(
+        '.labels[data-id="patient_id"]'
+      );
+      var patientIdText = patientIdLabel
+        ? patientIdLabel.textContent.trim()
+        : null;
+
+      // Extract only the numeric part from the string
+      var numericPart = patientIdText.match(/\d+/);
+      var patientId = numericPart ? numericPart[0] : null;
+
+      if (patientId) {
+        window.location.href =
+          '{% url "admin-add-appointment" %}?user_id=' + patientId;
+      } else {
+        console.log("Error: Patient ID not found.");
+      }
+    } else if (buttonClicked === "scanner") {
+      // Perform the scanner action
+      // Add your scanner logic or redirection here
+      window.location.href = '{% url "view-scanner" %}';
+    }
+  }
+</script>
+
+{% endblock content %}

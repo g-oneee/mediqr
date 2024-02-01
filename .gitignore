@@ -1,0 +1,59 @@
+# Virtual environment
+venv/
+
+# Python bytecode
+__pycache__/
+
+# Django specific
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+
+# Secret key
+secret_key.txt
+
+# Media files
+media/
+
+# Static files
+static/
+
+# Machine learning models (assuming they are saved in a directory)
+models/
+
+# Ignore environment configuration
+.env
+
+# Ignore IDE files
+.vscode/
+.idea/
+
+# Ignore local development settings
+local_settings.py
+
+# Ignore logs and other generated files
+*.log
+*.json
+*.csv
+
+
+# Ignore Docker-related files
+Dockerfile
+docker-compose.yml
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore temporary files
+*.tmp
+
+# Ignore any compiled binaries or libraries
+*.so
+*.pyc
+
+# Ignore sensitive information like API keys or credentials
+*.env
+
+# Ignore user-specific files
+*.iml

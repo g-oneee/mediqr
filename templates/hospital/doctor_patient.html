@@ -1,0 +1,67 @@
+{% extends 'hospital/doctor_base2.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid bg-primary my-5 py-5" style = "margin-top:-100px;">
+    <div class="container py-5">
+        <div class="row gx-5">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="mb-4">
+                    <h3 class="d-inline-block text-white text-uppercase border-bottom border-5">Welcome</h3>
+                    <h1 class="display-4">{{request.user.first_name}}</h1>
+                </div>
+               
+                <a class="btn btn-dark rounded-pill py-3 px-5 me-3" href="/doctor-patient">View Patients</a>
+                <a class="btn btn-outline-dark rounded-pill py-3 px-5" href="/doctor-appointment">View Appointments</a>
+               
+            </div>
+           
+                
+                    <img class="rounded-circle shadow-4-strong img-fluid"  style="width: 300px; height: 250px; margin-right:-400px" alt="avatar2" src="{% static doctor.profile_pic.url %} " />
+                
+            
+        </div>
+    </div>
+</div>
+<div class="container-fluid py-5">
+    <div class="container">
+        
+        <div class="row g-5">
+            <div class="col-lg-4 col-md-6" style = "margin-left:250px;">
+              <a href="/doctor-view-patient">
+                <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
+                  
+                    <h2 class="mb-3">Your Patient Record</h2>
+                    <div class="service-icon mb-4">
+                        <i class="fa fa-2x fas fa fa-list text-white"></i>
+                    </div>
+                    <a class="btn btn-lg btn-primary rounded-pill" href="/doctor-view-patient" >
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+              </a>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <a href="/doctor-view-discharge-patient" >
+                <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
+    
+                    
+                    <h2 class="mb-3">Your Discharged Patient</h2>
+                    <div class="service-icon mb-4">
+                        <i class="fa fa-2x fa fa-user text-white"></i>
+                    </div>
+                    <a class="btn btn-lg btn-primary rounded-pill" href="/doctor-view-discharge-patient">
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+              </a>
+            </div>
+         
+         
+           
+           
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

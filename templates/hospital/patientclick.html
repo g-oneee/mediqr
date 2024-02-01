@@ -1,0 +1,33 @@
+{% extends 'hospital/homebase.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid py-5">
+  <div class="container">
+      <div class="row gx-5">
+          <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
+              <div class="position-relative h-100">
+                  <img class="position-absolute w-100 h-100 rounded" src="{% static 'img/vv.jpg' %}" style="object-fit: cover;">
+              </div>
+          </div>
+          <div class="col-lg-7">
+              <div class="mb-4">
+                  
+                  <h1 class="display-4">Hello, Patient</h1>
+                  <h2 class="d-inline-block text-primary text-uppercase border-bottom border-5">Welcome to MediQR</h2>
+                  <p>Welcome to MediQR, where your health is our priority! We are delighted to have you as a new member of our healthcare community. Your well-being is important to us, and we are committed to providing you with exceptional care and support.</p>
+                  <p>Need to see a healthcare professional? Our user-friendly appointment scheduling system allows you to book appointments at your convenience. We understand that your time is valuable, and we strive to make the process as seamless as possible.</p>
+              <a class="btn btn-dark rounded-pill py-3 px-5 me-3" href="/patientsignup">Sign up</a>
+              <a class="btn btn-outline-dark rounded-pill py-3 px-5" href="/patientlogin">Login</a>
+                 
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+{% endblock content %}
+

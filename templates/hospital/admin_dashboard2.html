@@ -1,0 +1,164 @@
+{% extends 'hospital/admin_base2.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <style media="screen">
+      td {
+       
+        font-size: 20px;
+      }
+      th {
+        
+       
+        font-size: 24px;
+      }
+      </style>
+    </head>
+<div class="container-fluid bg-primary my-5 py-5" style = "margin-top:-100px;">
+    <div class="container py-5">
+        <div class="row gx-5">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="mb-4">
+                    <h3 class="d-inline-block text-white text-uppercase border-bottom border-5">Welcome</h3>
+                    <h1 class="display-4">{{request.user.first_name}}</h1>
+                </div>
+               
+                <a class="btn btn-dark rounded-pill py-3 px-5 me-3" href="/admin-patient">View Patients</a>
+                <a class="btn btn-outline-dark rounded-pill py-3 px-5" href="/admin-doctor">View Doctors</a>
+               
+            </div>
+           
+                
+                    <img class="rounded-circle shadow-4-strong img-fluid"  style="width: 300px; height: 250px; margin-right:-400px" alt="avatar2" src="{% static "images/adminpropic.png" %} " />
+                
+            
+        </div>
+    </div>
+</div>
+<div class="container-fluid py-5">
+    <div class="container">
+        
+        <div class="row g-5">
+            <div class="col-lg-4 col-md-6">
+                <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
+                  
+                       
+                    
+                    <h2 class="mb-3">Total Doctors</h2>
+                    <h3>{{doctorcount}}</h3>
+                    <p>Approval Required : {{pendingdoctorcount}}</p>
+                    <div class="service-icon mb-4">
+                        <i class="fa fa-2x fa fa-user-md text-white"></i>
+                    </div>
+                    <a class="btn btn-lg btn-primary rounded-pill" href="">
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
+                  
+                       
+                    
+                    <h2 class="mb-3">Total Patient</h2>
+                    <h3>{{patientcount}}</h3>
+                    <p>Wants to Admit : {{pendingpatientcount}}</p>
+                    <div class="service-icon mb-4">
+                        <i class="fa fa-2x fa fa-user text-white"></i>
+                    </div>
+                    <a class="btn btn-lg btn-primary rounded-pill" href="">
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
+                  
+                       
+                    
+                    <h2 class="mb-3">Total Appointment</h2>
+                    <h3>{{appointmentcount}}</h3>
+                    <p>Approve Appointments :{{pendingappointmentcount}} </p>
+                    <div class="service-icon mb-4">
+                        <i class="fa fa-2x fa fa-calendar text-white"></i>
+                    </div>
+                    <a class="btn btn-lg btn-primary rounded-pill" href="">
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>     
+        </div>
+    </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="panel panel-primary col-md-5" style="margin-left: 2%">
+      <div class="panel-heading" style="text-align: center">
+        <h2 class="panel-title">Recent Doctors</h2>
+      </div>
+      <table class="table table-hover table-striped" id="dev-table">
+        <thead class="thead-dark">
+          <tr>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Contact</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        {% for d in doctors %}
+        <tr>
+          <td>{{d.get_name}}</td>
+          <td>{{d.department}}</td>
+          <td>{{d.mobile}}</td>
+          {%if d.status%}
+          <td><span class="label label-primary">Permanent</span></td>
+          {% else %}
+          <td><span class="label label-success">On Hold</span></td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <div class="panel panel-primary col-md-5" style="margin-left: 5%">
+      <div class="panel-heading" style="text-align: center">
+        <h2 class="panel-title">Recent Patient</h2>
+      </div>
+      <table class="table table-hover table-striped" id="dev-table">
+        <thead class="thead-dark">
+          <tr>
+            <th>Name</th>
+            <th>Symptoms</th>
+            <th>Contact</th>
+            <th>Address</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        {% for p in patients %}
+        <tr class="clickable-row" data-href="/patient_profile/{{ p.user_id }}">
+          <td>{{p.get_name}}</td>
+          <td>{{p.symptoms}}</td>
+          <td>{{p.mobile}}</td>
+          <td>{{p.address}}</td>
+          {%if p.status%}
+          <td><span class="label label-primary">Admitted</span></td>
+          {% else %}
+          <td><span class="label label-success">On Hold</span></td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var rows = document.querySelectorAll(".clickable-row");
+    rows.forEach(function (row) {
+      row.addEventListener("click", function () {
+        window.location.href = row.dataset.href;
+      });
+    });
+  });
+</script>
+{% endblock content %}

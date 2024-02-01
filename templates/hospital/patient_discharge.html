@@ -1,0 +1,171 @@
+{% extends 'hospital/patient_base2.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <style media="screen">
+      td {
+       
+        font-size: 20px;
+      }
+      th {
+        
+       
+        font-size: 24px;
+      }
+      </style>
+    </head>
+<div class="container-fluid bg-primary my-5 py-5" style = "margin-top:-100px;">
+    <div class="container py-5">
+        <div class="row gx-5">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="mb-4">
+                    <h3 class="d-inline-block text-white text-uppercase border-bottom border-5">Welcome</h3>
+                    <h1 class="display-4">{{request.user.first_name}}</h1>
+                </div>
+               
+                <a class="btn btn-dark rounded-pill py-3 px-5 me-3" href="/patient-profile">My Profile</a>
+                <a class="btn btn-outline-dark rounded-pill py-3 px-5" href="/patient-appointment">View Appointments</a>
+               
+            </div>
+           
+                
+                    <img class="rounded-circle shadow-4-strong img-fluid"  style="width: 300px; height: 250px; margin-right:-400px" alt="avatar2" src="{% static '/images/v.png' %} " />
+                
+            
+        </div>
+    </div>
+</div>
+
+{%if is_discharged%}
+<div class="invoice-box">
+  <table cellpadding="0" cellspacing="0">
+    <tr class="top">
+      <td colspan="2">
+        <table>
+          <tr>
+            <td class="title">
+              <h1>Hospital Management</h1>
+            </td>
+
+            <td>
+
+              Admit Date: {{admitDate}}<br>
+              Release Date: {{releaseDate}}<br>
+              Days Spent: {{daySpent}}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr class="information">
+      <td colspan="2">
+        <table>
+          <tr>
+            <td>
+              Patient Name : {{patientName}}<br>
+              Patient Contact : {{mobile}}<br>
+              Patient Addres : {{address}}<br>
+            </td>
+
+            <td>
+              Doctor Name :<br>
+              {{assignedDoctorName}}<br>
+
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr class="heading">
+      <td>
+        Disease and Symptoms
+      </td>
+      <td>
+
+      </td>
+
+    </tr>
+
+    <tr class="details">
+      <td>
+        {{symptoms}}
+      </td>
+    </tr>
+    <tr class="heading">
+      <td>
+        Item
+      </td>
+
+      <td>
+        Price
+      </td>
+    </tr>
+
+    <tr class="item">
+      <td>
+        Room Charge of {{daySpent}} Days
+      </td>
+
+      <td>
+        {{roomCharge}}
+      </td>
+    </tr>
+
+    <tr class="item">
+      <td>
+        Doctor Fee
+      </td>
+
+      <td>
+        {{doctorFee}}
+      </td>
+    </tr>
+
+    <tr class="item">
+      <td>
+        Medicine Cost
+      </td>
+
+      <td>
+        {{medicineCost}}
+      </td>
+    </tr>
+
+    <tr class="item last">
+      <td>
+        Other Charge
+      </td>
+
+      <td>
+        {{OtherCharge}}
+      </td>
+    </tr>
+
+    <tr class="total">
+      <td></td>
+
+      <td>
+        Total : {{total}}
+      </td>
+    </tr>
+
+  </table>
+</div>
+<br><br>
+<div class="download">
+  <a style="background:red; width:500px;" href="{% url 'download-pdf' patientId  %}">Download</a>
+</div>
+
+
+
+{%else%}
+<h2 style="text-align:center;">You Are Not Discharged By Hospital !</h2>
+<br><br>
+<h3 style="text-align:center;">You Can Download Invoice after getting discharged.</h3>
+{%endif%}
+
+
+  
+{% endblock content %}

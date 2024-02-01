@@ -1,0 +1,23 @@
+{% extends 'hospital/homebase.html' %}
+
+{% block content %}
+
+<div class="container-fluid bg-primary my-5 py-5">
+  <div class="container py-5">
+      <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+          <h3 class="d-inline-block text-white text-uppercase border-bottom border-5">Admin</h3>
+          <h1 class="display-4 mb-4">Hello, Admin</h1>
+          <h2 class="text-white fw-normal">Welcome to MediQR</h2>
+         
+      </div>
+      <div class="mx-auto text-center" style="width: 100%; max-width: 600px;">
+          <div class="input-group text-center">
+              <a class="btn btn-danger btn-lg text-center"  href="/adminsignup" role="button" style="margin-right: 50px;margin-left: 180px ">Sign Up</a>
+              <a class="btn btn-success btn-lg text-center" href="/adminlogin" role="button" style="margin-right: 100px; ">Login</a>
+        </div>
+      </div>
+  </div>
+</div>
+
+
+{% endblock content %}

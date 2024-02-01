@@ -1,0 +1,112 @@
+{% extends 'hospital/doctor_base.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+  <style type="text/css">
+     a:link {
+      text-decoration: none;
+    }
+
+    .menu {
+      top: 50px;
+    }
+
+    h6 {
+      color: white;
+    }
+
+    .order-card {
+      color: #fff;
+    }
+
+    .bg-c-blue {
+      background: linear-gradient(45deg, #4099ff, #73b4ff);
+    }
+
+    .bg-c-green {
+      background: linear-gradient(45deg, #2ed8b6, #59e0c5);
+    }
+
+    .bg-c-yellow {
+      background: linear-gradient(45deg, #FFB64D, #ffcb80);
+    }
+
+    .bg-c-pink {
+      background: linear-gradient(45deg, #FF5370, #ff869a);
+    }
+
+
+    .card {
+      border-radius: 5px;
+      -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+      box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+      border: none;
+      margin-bottom: 30px;
+      -webkit-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .card .card-block {
+      padding: 25px;
+    }
+
+    .order-card i {
+      font-size: 26px;
+    }
+
+    .f-left {
+      float: left;
+    }
+
+    .f-right {
+      float: right;
+    } 
+  </style>
+</head>
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{% static doctor.profile_pic.url %}"><span class="font-weight-bold">{{doctor}}</span><span> </span></div>
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">My Profile </h4>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6" w="100"><label class="labels">Name : {{doctor}}</div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Id : {{doctor.user_id}}</label></div>
+                    <div class="col-md-12"><label class="labels">department : {{doctor.department}}</label></div>
+                    <div class="col-md-12">
+                        <label class="labels">
+                            Status: 
+                            {% if doctor.status %}
+                                <span style="color: green;">&#10004;</span> <!-- Checkmark -->
+                            {% else %}
+                                <span style="color: red;">&#10008;</span> <!-- Cross -->
+                            {% endif %}
+                        </label>
+                    </div>
+                    <div class="col-md-12"><label class="labels">Mobile Number : {{doctor.mobile}}</label></div>
+                    <div class="col-md-12"><label class="labels">Address : {{doctor.address}}</label></div>
+                </div>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Change Profile</button></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img  width="150px" src="{{doctor.qrCode}}"><span class="font-weight-bold">My QR code</span><span> </span></div> -->
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+{% endblock content %}

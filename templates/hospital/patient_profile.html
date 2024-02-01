@@ -1,0 +1,65 @@
+{% extends 'hospital/patient_base2.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <style media="screen">
+      td {
+       
+        font-size: 20px;
+      }
+      .labels{
+        
+       
+        font-size: 20px;
+      }
+      </style>
+    </head>
+<div class="container-fluid bg-primary my-5 py-5" style = "margin-top:-100px;">
+    <div class="container py-5">
+        <div class="row gx-5">
+          <div class="container rounded bg-white mt-5 mb-5">
+            <div class="row">
+                <div class="col-md-3 border-right">
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{% static patient.profile_pic.url %}"><span class="font-weight-bold">{{patient}}</span><span> </span></div>
+                </div>
+                <div class="col-md-5 border-right">
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h2 class="text-right">My Profile </h2>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6"><label class="labels">Name : {{patient}}</div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12"><label class="labels">Blood Group : {{patient.Blood_group_choices}}</label></div>
+                            <div class="col-md-12"><label class="labels">Id : {{patient.user_id}}</label></div>
+                            <div class="col-md-12"><label class="labels">Gender : {{patient.gender}}</label></div>
+                            <div class="col-md-12"><label class="labels">Height : {{patient.height}} cm</label></div>
+                            <div class="col-md-12"><label class="labels">Weight : {{patient.weight}} kg</label></div>
+                            <div class="col-md-12"><label class="labels">Address : {{patient.address}}</label></div>
+                            <div class="col-md-12"><label class="labels">Mobile Number : {{patient.mobile}}</label></div>
+                            <div class="col-md-12"><label class="labels">Emergency Contact Number : {{patient.mobile2}}</label></div>
+                            <div class="col-md-12"><label class="labels">History : {{patient.history}}</label></div>
+                        </div>
+                        <div class="mt-5 text-center">
+                          <button class="btn btn-primary profile-button" type="button">Change Profile</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img  width="150px" src="{% static patient.qrCode.url %}"><span class="font-weight-bold">My QR code</span><span> </span></div>
+                    <!-- <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img  width="150px" src="{{patient.qrCode}}"><span class="font-weight-bold">My QR code</span><span> </span></div> -->
+                </div>
+            </div>
+        </div>
+        </div>
+           
+                
+                   
+        </div>
+    </div>
+</div>
+
+
+  
+{% endblock content %}

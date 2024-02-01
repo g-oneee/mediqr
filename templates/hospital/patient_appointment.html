@@ -1,0 +1,53 @@
+{% extends 'hospital/patient_base2.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid bg-primary my-5 py-5" style = "margin-top:-100px;">
+  <div class="container py-5">
+      <div class="row gx-5">
+          <div class="col-lg-6 mb-5 mb-lg-0">
+              <div class="mb-4">
+                  <h3 class="d-inline-block text-white text-uppercase border-bottom border-5">Welcome</h3>
+                  <h1 class="display-4">{{request.user.first_name}}</h1>
+              </div>
+             
+              <a class="btn btn-dark rounded-pill py-3 px-5 me-3" href="/patient-profile">My Profile</a>
+              <a class="btn btn-outline-dark rounded-pill py-3 px-5" href="/patient-appointment">View Appointments</a>
+             
+          </div>
+         
+              
+                  <img class="rounded-circle shadow-4-strong img-fluid"  style="width: 300px; height: 250px; margin-right:-400px" alt="avatar2" src="{% static '/images/v.png' %} " />
+              
+          
+      </div>
+  </div>
+</div>
+
+<div class="container-fluid py-5">
+  <div class="container">
+      <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+
+          <h1 class="display-4">Appointments</h1>
+      </div>
+      <div class="row g-5">
+          <div class="col-lg-4 col-md-6"style = "margin-left:470px;">
+            <a href="/patient-view-appointment">
+              <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center">
+                  <div class="service-icon mb-4">
+                      <i class="fa fa-2x fa-user-md text-white"></i>
+                  </div>
+                  <h4 class="mb-3">View Your Appointment</h4>
+                  <a class="btn btn-lg btn-primary rounded-pill" href="">
+                      <i class="bi bi-arrow-right"></i>
+                  </a>
+              </div>
+            </a>
+          </div>
+         
+   
+      </div>
+  </div>
+</div>
+
+{% endblock content %}

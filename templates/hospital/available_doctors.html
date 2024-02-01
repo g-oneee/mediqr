@@ -1,0 +1,47 @@
+{% extends 'hospital/patient_base2.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <style media="screen">
+      td {
+       
+        font-size: 20px;
+      }
+      th {
+        
+       
+        font-size: 24px;
+      }
+      </style>
+    </head>
+    <div class="container ">
+      <div class="row " style="margin-top: 100px;" >
+          {% for doc in doctor %}
+      <div class="col-lg-4 my-3" style="width: 420px;">
+      <div class="product-item position-relative bg-light d-flex flex-column text-center" style="height: 450px;">
+          <img class="img-fluid mx-auto mb-3 mt-3" style="height: 150px; width: 150px; object-fit: cover; border-radius: 50%;" src="{% static doc.profile_pic.url %}" alt="">
+          <h6 class="text-uppercase" style="font-size: 18px ; color:black ;">{{doc}}</h6>
+          <h5 class="text-primary mb-2" style="font-size: 16px;">Department: {{doc.department}}</h5>
+          <h5 class="text-primary mb-2" style="font-size: 16px;">Mobile Number: {{doc.mobile}}</h5>
+           <label class="labels">
+                              Status: 
+                              {% if doc.status %}
+                                  <span style="color: green;">&#10004;</span> <!-- Checkmark -->
+                              {% else %}
+                                  <span style="color: red;">&#10008;</span> <!-- Cross -->
+                              {% endif %}
+                          </label>
+          <button type="button" class="btn btn-primary w-50 mx-auto   profile-button"  >Book appointment</button>
+          
+       </div>
+      </div>
+  
+  
+          {% endfor %}
+      </div>
+  </div>
+      
+
+
+  
+{% endblock content %}

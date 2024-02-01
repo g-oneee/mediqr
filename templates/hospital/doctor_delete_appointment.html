@@ -1,0 +1,63 @@
+{% extends 'hospital/doctor_base2.html' %}
+{% load static %}
+{% block content %}
+
+<style media="screen">
+  td {
+   
+    font-size: 20px;
+  }
+  th {
+    
+   
+    font-size: 24px;
+  }
+  </style>
+<div class="container-fluid bg-primary my-5 py-5" style = "margin-top:-100px;">
+    <div class="container py-5">
+        <div class="row gx-5">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="mb-4">
+                    <h3 class="d-inline-block text-white text-uppercase border-bottom border-5">Welcome</h3>
+                    <h1 class="display-4">{{request.user.first_name}}</h1>
+                </div>
+               
+                <a class="btn btn-dark rounded-pill py-3 px-5 me-3" href="/doctor-patient">View Patients</a>
+                <a class="btn btn-outline-dark rounded-pill py-3 px-5" href="/doctor-appointment">View Appointments</a>
+               
+            </div>
+           
+                
+                    <img class="rounded-circle shadow-4-strong img-fluid"  style="width: 300px; height: 250px; margin-right:-400px" alt="avatar2" src="{% static doctor.profile_pic.url %} " />
+                
+            
+        </div>
+    </div>
+</div>
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2 class="panel-title">Delete Your Appointments</h2>
+    </div>
+    <table class="table table-hover" id="dev-table">
+      <thead>
+        <tr>
+          <th>Patient Name</th>
+          {% comment %} <th>Picture</th> {% endcomment %}
+          <th>Description</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      {% for a,p in appointments %}
+      <tr>
+        <td>{{a.patientName}}</td>
+        {% comment %} <td> <img src="{% static p.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td> {% endcomment %}
+        <td>{{a.description}}</td>
+        <td><a class="btn btn-danger btn-xs" href="{% url 'delete-appointment' a.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+{% endblock content %}

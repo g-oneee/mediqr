@@ -1,0 +1,60 @@
+{% extends 'hospital/admin_base2.html' %}
+{% load static %}
+{% block content %}
+
+<form id="scanForm" method="post" action="{% url 'view-scanner' %}">
+    {% csrf_token %}
+    <div id="scan">
+        <h1>Patient Record Scanner</h1>
+        <video id="scanner" width="100%"></video>
+    </div>
+    <input type="hidden" id="scannedContent" name="scanned_content" value="">
+</form>
+
+<script src="https://cdn.rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+<script>
+    const scanner = new Instascan.Scanner({ video: document.getElementById('scanner') });
+
+    scanner.addListener('scan', function (content) {
+        // Set the scanned content in the hidden input field
+        document.getElementById('scannedContent').value = content;
+        // Submit the form
+        document.getElementById('scanForm').submit();
+    });
+
+    Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+            scanner.start(cameras[0]);
+        } else {
+            console.error('No cameras found.');
+        }
+    }).catch(function (e) {
+        console.error(e);
+    });
+</script>
+
+<style>
+    #scan {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 50vw;
+        margin-top: 50px;
+        margin-left: 260px;
+        margin-bottom: 200px;
+        font-family: 'Arial', sans-serif;
+    }
+
+    h1 {
+        margin-top: 10px;
+    }
+
+    #scanner {
+        max-width: 80%;
+        border: 2px solid #333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+</style>
+
+{% endblock content %}

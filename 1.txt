@@ -1,0 +1,35 @@
+route to user patient profile in admin dashboard done
+create each user profile in admin (and also show all previous appointments with that patient) done
+
+
+
+
+patient
+name and department in signup
+tips and tricks stactic 
+chatbot done 
+available doctors done 
+view appointments
+past appointments shayad hua hien already
+past bills
+
+request for appointments ?
+
+
+doctors
+view appointed patients done
+past patients done
+
+
+
+doctor view patient
+
+
+
+appointmentSS
+PATIENT SE appointMENT
+
+datetime change to ist
+
+
+
