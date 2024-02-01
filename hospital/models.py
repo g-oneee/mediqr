@@ -60,7 +60,7 @@ class Patient(models.Model):
     mobile = models.CharField(max_length=20,null=False)
     mobile2 = models.CharField(max_length=20,null=False)
     history = models.CharField(max_length=100,null=False)
-    # assignedDoctorId = models.PositiveIntegerField(null=True,default =0)
+    assignedDoctorId = models.PositiveIntegerField(null=True,default =0)
     # assignedDoctorId = models.PositiveIntegerField(null=True,default=14)
     dob=models.DateField(auto_now=True)
     status=models.BooleanField(default=False)
