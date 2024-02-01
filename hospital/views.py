@@ -622,6 +622,9 @@ def admin_view_appointment_view(request):
 #             appointment.save()
 #         return HttpResponseRedirect('admin-view-appointment')
 #     return render(request,'hospital/admin_add_appointment.html',context=mydict)
+import datetime
+from django.db.models import Q
+from django.utils import timezone
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
@@ -629,11 +632,21 @@ def admin_add_appointment_view(request):
     user_id = request.GET.get('user_id', None)
     print('--admin--add--appointment')
     print(user_id)
-    
+    appointment = None 
+    # try:
+    #     appointment = models.Appointment.objects.get(patientId=user_id) 
+    #     appointmentForm = forms.AppointmentForm(instance=appointment)
+    # except models.Appointment.DoesNotExist:
+    #     appointmentForm = forms.AppointmentForm()
     try:
-        appointment = models.Appointment.objects.get(patientId=user_id)
+        # Try to get an existing appointment for today and the given patientId
+        appointment = models.Appointment.objects.get(
+            Q(patientId=user_id) & Q(appointmentDate=timezone.now().date())
+        )
         appointmentForm = forms.AppointmentForm(instance=appointment)
+        appointment.delete()  
     except models.Appointment.DoesNotExist:
+        # If there's no existing appointment, create a new form
         appointmentForm = forms.AppointmentForm()
 
     mydict = {'appointmentForm': appointmentForm}
@@ -643,6 +656,7 @@ def admin_add_appointment_view(request):
         if appointmentForm.is_valid():
             appointment = appointmentForm.save(commit=False)
             appointment.doctorId = request.POST.get('doctorId')
+            print(type(appointment.appointmentDate))
             appointment.appointmentDate = request.POST.get('appointmentDate')
             appointment.appointmentTime = request.POST.get('appointmentTime')
             appointment.patientId = user_id
@@ -799,6 +813,7 @@ def view_scanner(request):
 #     return render(request, 'hospital/appointment.html', context=mydict)
 
 
+import datetime
 
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
@@ -820,6 +835,7 @@ def appointment_view(request,patient_id=None):
                 appointment1.patient_id = patient_id
                 appointment = appointment1.save(commit=False)
                 appointment.patientId = patient_id
+                appointment.appointmentDate = datetime.datetime.today
                 appointment.status = True
                 appointment.save()  
     if request.method == 'POST':
